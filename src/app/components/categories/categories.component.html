@@ -1,0 +1,80 @@
+<div class="dashboard-wrapper new">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <h2 class="pageheader-title">Categories</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header">
+              <button routerLink="form" type="submit" class="btn btn-sm">
+                Add New
+              </button>
+            </h5>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table  id="example" class="table table-striped table-bordered second" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th (click)="sortTable('name')">
+                        Name
+                        <span *ngIf="sortOptions.key === 'name' && !sortOptions.reverse">
+                          <i class="fa-solid fa-arrow-up-wide-short"></i> <!-- Ascending sort icon -->
+                        </span>
+                        <span *ngIf="sortOptions.key === 'name' && sortOptions.reverse">
+                          <i class="fa-solid fa-arrow-down-wide-short"></i> <!-- Descending sort icon -->
+                        </span>
+                      </th>
+                      <th>Color</th>
+                      <th>Icon</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let category of categories">
+                      <td>{{ category.name }}</td>
+                      <td>
+                        <i
+                          style="font-size: 1.5rem"
+                          [ngStyle]="{
+                            color: category.color,
+                            borderRadius: '50%',
+                          }"
+                          class="fa fa-circle"
+                        ></i>
+                      </td>
+                      <td>
+                        <i
+                          [ngClass]="'fa ' + 'fa-fw ' + 'fa-' + category.icon"
+                          style="font-size: 1rem; "
+                        ></i>
+                      </td>
+                      <td>
+                        <button
+                          class="btn btn-sm"
+                          (click)="category.id && deleteCategory(category.id)"
+                        >
+                          <i class="fa fa-fw fa-trash"  style="color: #f87171;"></i>
+                        </button>
+                        <button class="btn btn-sm ml-2" (click)="category.id && updateCategory(category.id)">
+                          <i class="fa-regular fa-pen-to-square"  style="color: #84cc16;"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

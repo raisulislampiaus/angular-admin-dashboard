@@ -1,0 +1,67 @@
+<div class="dashboard-wrapper new">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <h2 class="pageheader-title">Oders</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header"></h5>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table
+                  id="example"
+                  class="table table-striped table-bordered second"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Total Price</th>
+                      <th>Date Ordered</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let order of orders">
+                      <td>{{ order.user.name }}</td>
+                      <td>{{ order.totalPrice }}</td>
+                      <td>{{ order.dateOrdered | date : "short" }}</td>
+                      <td>
+                       {{order.status}}
+                      </td>
+                      <td>
+                        <button
+                          class="btn btn-sm"
+                          (click)="order.id && deleteOrder(order.id)"
+                        >
+                          <i
+                            class="fa fa-fw fa-trash"
+                            style="color: #f87171"
+                          ></i>
+                        </button>
+                        <button
+                          class="btn btn-sm"
+                          (click)="order.id && showOrder(order.id)"
+                        >
+                        <i class="fa-solid fa-eye"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

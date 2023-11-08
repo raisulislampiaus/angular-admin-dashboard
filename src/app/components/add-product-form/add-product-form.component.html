@@ -1,0 +1,153 @@
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="form-group col">
+            <label for="name" class="col-form-label">Name</label>
+            <input
+              formControlName="name"
+              id="name"
+              type="text"
+              class="form-control"
+            />
+            <small
+              *ngIf="productForm['name'].invalid && isSubmitted"
+              class="p-error"
+              >Name is required</small
+            >
+          </div>
+          <div class="form-group col">
+            <label for="brand" class="col-form-label">Brand</label>
+            <input
+              formControlName="brand"
+              id="brand"
+              type="text"
+              class="form-control"
+            />
+            <small
+              *ngIf="productForm['brand'].invalid && isSubmitted"
+              class="p-error"
+              >Brand is required</small
+            >
+          </div>
+          <div class="form-group col">
+            <label for="price" class="col-form-label">Price</label>
+            <input
+              formControlName="price"
+              id="price"
+              type="decimal"
+              class="form-control"
+            />
+            <small
+              *ngIf="productForm['price'].invalid && isSubmitted"
+              class="p-error"
+              >Price is required</small
+            >
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="countInStock" class="col-form-label"
+              >countInStock</label
+            >
+            <input
+              formControlName="countInStock"
+              id="countInStock"
+              type="decimal"
+              class="form-control"
+            />
+            <small
+              *ngIf="productForm['countInStock'].invalid && isSubmitted"
+              class="p-error"
+              >countInStock is required</small
+            >
+          </div>
+          <div class="form-group col">
+            <label for="category">Category:</label>
+            <select
+              id="category"
+              class="form-control"
+              formControlName="category"
+            >
+              <option value="" disabled>Select a Category</option>
+              <option *ngFor="let cat of catagories" [value]="cat.id">
+                {{ cat.name }}
+              </option>
+            </select>
+            <small
+              *ngIf="productForm['category'].invalid && isSubmitted"
+              class="p-error"
+              >Category is required</small
+            >
+          </div>
+          <div class="form-group col">
+            <label for="isFeatured">Is Featured</label><br />
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="isFeatured"
+                formControlName="isFeatured"
+              />
+              <label class="custom-control-label" for="isFeatured"></label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            formControlName="description"
+            [rows]="7"
+            [cols]="30"
+          ></textarea>
+          <small
+            *ngIf="productForm['description'].invalid && isSubmitted"
+            class="p-error"
+            >Description is required</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="richDescription">Product Details</label>
+          <textarea
+            class="form-control"
+            id="richDescription"
+            formControlName="richDescription"
+            [rows]="7"
+            [cols]="30"
+          ></textarea>
+          
+        </div>
+        <div class="form-group">
+          <label for="name">Main Image</label>
+          <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              id="name"
+              accept="image/*"
+              (change)="onImageUpload($event)"
+            />
+            <label class="custom-file-label" for="name">Choose file</label>
+            <small
+              *ngIf="productForm['image'].invalid && isSubmitted"
+              class="p-error"
+              >Image is required</small
+            >
+          </div>
+        </div>
+
+        <div class="col-2 mt-2 pl-0">
+          <img class="img-fluid" [src]="imageDisplay" alt="" />
+        </div>
+
+        <button type="button" class="btn btn-success" (click)="onSubmit()">
+          {{ editmode ? "Update" : "Create" }}
+          <i class="pi pi-plus"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
