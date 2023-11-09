@@ -5,7 +5,7 @@ import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OrderService } from 'src/app/services/order.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-home',
@@ -22,13 +22,11 @@ export class HomeComponent  implements OnInit, OnDestroy{
     private productService: ProductsDataService,
     private orderService: OrderService,
     private snackBar: MatSnackBar,
-    private spinner: NgxSpinnerService,
+   
    
   ) {}
   ngOnInit(): void {
-    this.spinner.show();
     combineLatest([
-      
       this.productService.getProductsCount(),
       this.userService.getUsersCount(),
       this.orderService.getOrdersCount(),
@@ -37,10 +35,18 @@ export class HomeComponent  implements OnInit, OnDestroy{
       .pipe(takeUntil(this.endsubs$))
       .subscribe((values) => {
         this.statistics = values;
-        setTimeout(() => {
-          this.spinner.hide();
-        }, 1000);
-      });
+      })
+     .pipe(takeUntil(this.endsubs$))
+      .subscribe(
+        (values) => {
+          this.statistics = values;
+          this.loading = false; 
+        },
+        (error) => {
+          console.error('Error fetching data', error);
+          this.loading = false; 
+        }
+      );
     
   }
 
