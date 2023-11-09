@@ -19,6 +19,7 @@ import { UsersComponent } from './components/users/users.component';
 import { OrderComponent } from './components/order/order.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { OrderFormComponent } from './components/order-form/order-form.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OrderFormComponent } from './components/order-form/order-form.component
     ColorPickerModule,
     PaginationModule,
     NgxSpinnerModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
