@@ -6,25 +6,23 @@ import { takeUntil } from 'rxjs/operators';
 import { OrderService } from 'src/app/services/order.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent  implements OnInit, OnDestroy{
+export class HomeComponent implements OnInit, OnDestroy {
   statistics: number[] = [];
   loading: boolean = true;
   endsubs$: Subject<any> = new Subject();
-  
+
   constructor(
     private userService: UserServiceService,
     private productService: ProductsDataService,
     private orderService: OrderService,
-    private snackBar: MatSnackBar,
-   
-   
+    private snackBar: MatSnackBar
   ) {}
+
   ngOnInit(): void {
     combineLatest([
       this.productService.getProductsCount(),
@@ -33,10 +31,6 @@ export class HomeComponent  implements OnInit, OnDestroy{
       this.orderService.getTotalSales()
     ])
       .pipe(takeUntil(this.endsubs$))
-      .subscribe((values) => {
-        this.statistics = values;
-      })
-     .pipe(takeUntil(this.endsubs$))
       .subscribe(
         (values) => {
           this.statistics = values;
@@ -47,13 +41,9 @@ export class HomeComponent  implements OnInit, OnDestroy{
           this.loading = false; 
         }
       );
-    
   }
 
   ngOnDestroy() {
     this.endsubs$.complete();
   }
-
-  
-  
 }
